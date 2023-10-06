@@ -1,11 +1,19 @@
+import React from 'react';
+import './App.scss';
 import SearchBar from "./SearchBar";
 
-function App() {
+const App = () => {
+
+  const submitSearch = ({searchText}) => { 
+    console.log("Submitted Search is: " + searchText);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <SearchBar />
+        <SearchBar submitSearch={submitSearch}/>
       </header>
+        
     </div>
   );
 }
