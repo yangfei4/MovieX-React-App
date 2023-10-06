@@ -1,3 +1,52 @@
+$SeachBarColor: gray;
+$SeachBarFocusColor: #699cee;
+
 .SearchBar{
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50%;
+    // border: 1px solid #000000;
+    //style for inputBox subcomponent
+    .SearchForm{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        width: 60%;
+        height: 100%;
+        border: 1px solid $SeachBarColor;
+        border-radius: 20px;
+        padding: 5px;
+        i {
+            margin-left: 10px;
+            font-size: 15px;
+            color: $SeachBarColor;
+        }
+        .InputBox{
+            flex-grow: 2;
+            outline: none;
+            border: none;
+            color: #555;
+            font-size: 20px;
+            padding: 0 10px;
+            margin-right: 10px;
+        }
+        .SearchButton{
+            width: 100px;
+            height: 100%;
+            border: none;
+            border-radius: 20px;
+            color: white;
+            background-color: #4614ec;
+            outline: none;
+            font-size: 20px;
+            padding: 0 10px;
+        }
+    }
+    .SearchForm:focus-within{
+        box-shadow: 0 0 3px 1px $SeachBarFocusColor;
+        transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    }
 }
