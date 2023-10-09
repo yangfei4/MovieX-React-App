@@ -2,6 +2,19 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Dogs and Cats
+### TMDB API
+### An example API Key based request looks like:
+```
+curl --request GET \
+     --url 'https://api.themoviedb.org/3/movie/11?api_key=43f32466ca1ce72ff63dd88e6eeebdcd'
+```
+### Finding Data
+Reference: [TMDB Documentation](https://developer.themoviedb.org/docs/finding-data)
+* `/search`: Text-based search by providing a query string and get the closest match(original, translated and alternative names and titles).[Search & Query For Details](https://developer.themoviedb.org/docs/search-and-query-for-details)
+* `/discover`: Search based on filters or definable values like ratings, certifications or release dates. Details refer to [Here](https://developer.themoviedb.org/reference/discover-movie).
+* `/find`: Find data with exsiting external IDs.(i.e. IMDB ID of a movie, TV show or person).
+
 ## Available Scripts
 
 In the project directory, you can run:
