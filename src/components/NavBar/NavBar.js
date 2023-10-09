@@ -1,13 +1,20 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import './style.scss';
 
 const NavBar = () => {
     return (
-     <div className="NavBar">
-        <header className="NavBar-header">
-          <h1>NavBar</h1>
-        </header>
-     </div>
+      <div className='NavBarContainer'>
+        <a href="/" className='AppLogo'>
+          <i className="fa fa-film"></i>
+        </a>
+        <nav className='NavBar'>
+          <div className='NavButtons'>
+            <NavLink className="NavLink" to='/'>Home</NavLink>
+            <NavLink className="NavLink" to='/gallery'>Gallery</NavLink>
+          </div>
+        </nav>
+      </div>
     );
 };
 
