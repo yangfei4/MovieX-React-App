@@ -1,0 +1,58 @@
+@import "../../App.scss";
+$page-blank-side: 200px;
+
+.gallery-container{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    .filter-buttons{
+        padding: 0 $page-blank-side;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-bottom: 10px;
+        button {
+            background: none;
+            border: 1px solid gray;
+            color: black;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: medium;
+            cursor: pointer;
+            &:hover, &.selected{
+                background-color: $primary-color;
+                color: white;
+                border: 1px solid $primary-color;
+            }
+        }
+    }
+    .gallery{
+        padding: 0 $page-blank-side;
+        display: flex;
+        flex-wrap: wrap;
+        .movie{
+            width: calc(20% - 10px);
+            margin-right: 10px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            &:hover{
+                .movie-title{
+                    color: $primary-color;
+                }
+            }
+            img{
+                width: 100%;
+                aspect-ratio: 207.4 / 311.09;
+                object-fit: cover;
+                overflow: hidden;
+            }
+            .movie-title{
+                // margin-top: 10px;
+                font-weight: bold;
+                color: black;
+            }
+        }
+    }
+}
