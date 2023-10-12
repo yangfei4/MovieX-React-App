@@ -1,11 +1,10 @@
-$primary-color: rgb(24, 59, 252);
+@import "./variables.scss";
 
 body {
     font-family: "Source Sans Pro",Arial,sans-serif;
     margin: 0;
     header{
         height: 3%;
-        width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
