@@ -12,4 +12,15 @@ body {
         margin: 0;
         background-color: $primary-color;
     }
+    footer {
+        background-color: $primary-color;
+        margin: 0;
+        height: 40px;
+        text-align: center;
+        //vertical centering
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+      }       
 }

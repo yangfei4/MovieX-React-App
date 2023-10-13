@@ -23,7 +23,7 @@ const App = () => {
         "original"
     ]
 });
-  
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -44,10 +44,11 @@ const App = () => {
           </header>
           <Routes>
             <Route path="/" element={<ListPage ApiImageConfig={ApiImageConfig}/>} />
-            <Route path="/gallery" element={<GalleryPage />} />
-            <Route path="/detail/:id" element={<DetailView />} />
+            <Route path="/gallery" element={<GalleryPage ApiImageConfig={ApiImageConfig}/>} />
+            <Route path="/detail/:id" element={<DetailView ApiImageConfig={ApiImageConfig}/>} />
           </Routes>
           <footer className="App-footer">
+            <p>&copy; 2023 Yangfei. All rights reserved.</p>
           </footer>
       </div>
     </BrowserRouter>
