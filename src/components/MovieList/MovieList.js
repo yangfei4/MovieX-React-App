@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./style.scss";
 import { 
@@ -9,13 +9,17 @@ import {
     DESC,
     ASC
  } from "../ListPage/sortConstant";
+ import { AppContext } from "../../App";
 
- const MovieList = ({ movies, ApiImageConfig, handleSortKeyChange, handleSortOrderChange}) => {
+ const MovieList = ({ movies, handleSortKeyChange, handleSortOrderChange}) => {
+    const {ApiImageConfig, setMoviesListToDisplay, setCurIndex} = useContext(AppContext);
     const { base_url, poster_sizes } = ApiImageConfig;
     const img_url = base_url + poster_sizes[4];
     
     const navigate = useNavigate();
-    const handleClick = (id) => {
+    const handleClick = (id, index) => {
+        setMoviesListToDisplay(movies);
+        setCurIndex(index);
         navigate(`/detail/${id}`);
     };
 
@@ -44,7 +48,7 @@ import {
             <div className="moviesContainer">
                 <div className="movies">
                     {movies.map((movie, index) => (
-                        <div className="movie" key={index} onClick={() => handleClick(movie.id)}>
+                        <div className="movie" key={index} onClick={() => handleClick(movie.id, index)}>
                             <img
                                 className="movie-poster"
                                 src={movie.poster_path ? (img_url+movie.poster_path) : "https://gitlab.com/yangfei4/mp2/-/raw/main/src/assets/Image_not_available.png?ref_type=heads"} 

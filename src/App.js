@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import axios from 'axios';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.scss';
@@ -7,6 +7,8 @@ import NavBar from './components/NavBar';
 import ListPage from './components/ListPage';
 import GalleryPage from './components/GalleryPage';
 import DetailView from './components/DetailView';
+
+export const AppContext = createContext();
 
 const App = () => {
 
@@ -36,20 +38,31 @@ const App = () => {
     fetchData();
   }, []);
 
+  const [moviesListToDisplay, setMoviesListToDisplay] = useState([]);
+  const [curIndex, setCurIndex] = useState(0); // 0-based index
+
+  useEffect(() => {
+    console.log("moviesListToDisplay is updated: ", moviesListToDisplay);
+  }, [moviesListToDisplay]);
+
   return (
     <BrowserRouter>
         <div className="App">
-          <header className="App-header">
-            <NavBar />
-          </header>
-          <Routes>
-            <Route path="/" element={<ListPage ApiImageConfig={ApiImageConfig}/>} />
-            <Route path="/gallery" element={<GalleryPage ApiImageConfig={ApiImageConfig}/>} />
-            <Route path="/detail/:id" element={<DetailView ApiImageConfig={ApiImageConfig}/>} />
-          </Routes>
-          <footer className="App-footer">
-            <p>&copy; 2023 Yangfei. All rights reserved.</p>
-          </footer>
+          <AppContext.Provider 
+            value={{ApiImageConfig, moviesListToDisplay, setMoviesListToDisplay, curIndex, setCurIndex}}
+          >
+            <header className="App-header">
+              <NavBar />
+            </header>
+            <Routes>
+              <Route path="/" element={<ListPage />} />
+              <Route path="/gallery" element={<GalleryPage />} />
+              <Route path="/detail/:id" element={<DetailView />} />
+            </Routes>
+            <footer className="App-footer">
+              <p>&copy; 2023 Yangfei. All rights reserved.</p>
+            </footer>
+          </AppContext.Provider>
       </div>
     </BrowserRouter>
   );

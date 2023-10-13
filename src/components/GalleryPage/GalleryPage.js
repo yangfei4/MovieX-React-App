@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import "./style.scss";
 import genres from "./genres";
+import { AppContext } from "../../App";
 
-const GalleryPage = ({ApiImageConfig}) => {
+const GalleryPage = () => {
+    const {ApiImageConfig, setMoviesListToDisplay, setCurIndex} = useContext(AppContext);
 
     const { base_url, poster_sizes } = ApiImageConfig;
     const img_url = base_url + poster_sizes[4];
@@ -16,7 +18,9 @@ const GalleryPage = ({ApiImageConfig}) => {
     const [filterKeyList, setFilterKeyList] = useState([]);
 
     const navigate = useNavigate();
-    const handleClick = (id) => {
+    const handleClick = (id, index) => {
+        setMoviesListToDisplay(movies);
+        setCurIndex(index);
         navigate(`/detail/${id}`);
     };
 
@@ -90,8 +94,8 @@ const GalleryPage = ({ApiImageConfig}) => {
             </div>
             <div className="gallery">
                 {movies.length === 0 && <div className="no-movies">No movie matches the filter</div>}
-                {movies.map((movie) => (
-                    <div className="movie" key={movie.id} onClick={() => handleClick(movie.id)}>
+                {movies.map((movie, index) => (
+                    <div className="movie" key={movie.id} onClick={() => handleClick(movie.id, index)}>
                         <img 
                             src={movie.poster_path ? (img_url+movie.poster_path) : "https://gitlab.com/yangfei4/mp2/-/raw/main/src/assets/Image_not_available.png?ref_type=heads"} 
                             alt={movie.title}
