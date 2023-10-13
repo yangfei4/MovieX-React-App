@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./style.scss";
 import { 
     POPULARITY,
@@ -12,6 +13,11 @@ import {
  const MovieList = ({ movies, ApiImageConfig, handleSortKeyChange, handleSortOrderChange}) => {
     const { base_url, poster_sizes } = ApiImageConfig;
     const img_url = base_url + poster_sizes[4];
+    
+    const navigate = useNavigate();
+    const handleClick = (id) => {
+        navigate(`/detail/${id}`);
+    };
 
     return (
         (movies.length === 0) ? (<div className="no-movies">No movies found</div>) :
@@ -38,7 +44,7 @@ import {
             <div className="moviesContainer">
                 <div className="movies">
                     {movies.map((movie, index) => (
-                        <div className="movie" key={index}>
+                        <div className="movie" key={index} onClick={() => handleClick(movie.id)}>
                             <img
                                 className="movie-poster"
                                 src={movie.poster_path ? (img_url+movie.poster_path) : "https://gitlab.com/yangfei4/mp2/-/raw/main/src/assets/Image_not_available.png?ref_type=heads"} 
