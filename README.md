@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Dogs and Cats
+## Odds and Ends
 ### TMDB API
 ### An example API Key based request looks like:
 ```
