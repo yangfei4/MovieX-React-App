@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import "./style.scss";
@@ -13,6 +14,11 @@ const GalleryPage = ({ApiImageConfig}) => {
 
     const [movies, setMovies] = useState([]);
     const [filterKeyList, setFilterKeyList] = useState([]);
+
+    const navigate = useNavigate();
+    const handleClick = (id) => {
+        navigate(`/detail/${id}`);
+    };
 
     // a function only gets called when the component is created
     useEffect(() => {
@@ -42,7 +48,6 @@ const GalleryPage = ({ApiImageConfig}) => {
     useEffect(() => {
         const filterMoviesByGenre = () => {
             const filteredMovies = moviesPool.filter((movie) => {
-                console.log(movie.genre_ids);
                 // check if movie.genre_ids contains any of the filterKeyList
                 for(let i = 0; i < filterKeyList.length; i++){
                     if(!movie.genre_ids.includes(filterKeyList[i])){
@@ -54,7 +59,7 @@ const GalleryPage = ({ApiImageConfig}) => {
             setMovies(filteredMovies);
         };
         filterMoviesByGenre();
-    }, [filterKeyList]);
+    }, [filterKeyList, moviesPool]);
 
     const toggleFilter = (id) => {
         if(filterKeyList.includes(id)){
@@ -86,10 +91,11 @@ const GalleryPage = ({ApiImageConfig}) => {
             <div className="gallery">
                 {movies.length === 0 && <div className="no-movies">No movie matches the filter</div>}
                 {movies.map((movie) => (
-                    <div className="movie" key={movie.id}>
+                    <div className="movie" key={movie.id} onClick={() => handleClick(movie.id)}>
                         <img 
                             src={movie.poster_path ? (img_url+movie.poster_path) : "https://gitlab.com/yangfei4/mp2/-/raw/main/src/assets/Image_not_available.png?ref_type=heads"} 
-                            alt={movie.title} />
+                            alt={movie.title}
+                        />
                         <div className="movie-title">
                             {movie.title}
                         </div>
