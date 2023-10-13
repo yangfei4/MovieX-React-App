@@ -1,9 +1,11 @@
+@import "../../variables.scss";
 .no-movies{
     margin: 50px auto;
     text-align: center;
     font-size: 20px;
     font-weight: bold;
     color: gray;
+    min-height: 100vh;
 }
 .list-container{
     display: block;
@@ -49,6 +51,12 @@
                 border-radius: 10px;
                 box-shadow: 0 0 10px rgba(0,0,0,0.5);
                 overflow: hidden;
+                transition: all 0.05s ease-in-out;
+                &:hover {
+                    box-shadow: 0 0 10px rgba(0,0,0,0.8);
+                    scale: 1.05;
+                    cursor: pointer;
+                }
                 img{
                     height: 100%;
                     width: 100px;

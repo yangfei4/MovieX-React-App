@@ -4,6 +4,7 @@
     display: flex;
     flex-direction: column;
     margin-top: 10px;
+    min-height: 100vh;
     .filter-buttons{
         padding: 0 $page-blank-side;
         display: flex;
@@ -36,10 +37,16 @@
             margin-right: 10px;
             margin-bottom: 20px;
             cursor: pointer;
+            transition: all 0.05s ease-in-out;
+            border-radius: 5px;
+            overflow: hidden;
+            color: gray;
             &:hover{
                 .movie-title{
-                    color: $primary-color;
+                    font-weight: bolder;
                 }
+                scale: 1.05;
+                
             }
             img{
                 width: 100%;
@@ -48,8 +55,7 @@
                 overflow: hidden;
             }
             .movie-title{
-                // margin-top: 10px;
-                font-weight: bold;
+                font-weight: light;
                 color: black;
             }
         }

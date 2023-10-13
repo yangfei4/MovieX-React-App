@@ -61,7 +61,6 @@ const ListPage = ({ApiImageConfig}) => {
         if (JSON.stringify(sortedMovies) !== JSON.stringify(movies)) {
             setMovies(sortedMovies);
         }
-        console.log("sortMovies happened");
     }, [sortOrder, movies]);
 
     useEffect(() => {
