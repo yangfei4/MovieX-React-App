@@ -16,6 +16,7 @@ pages:
   script:
     - npm install        # Install all dependencies
     - npm run build      # Build for prod
+    - sed -i 's|/mp2/static|./static|g' build/index.html # Fix static path by changing path to relative
     - mv public _public  # CRA and gitlab pages both use the public folder. Only do this in a build pipeline.
     - mv build public    # Move build files to public dir for Gitlab Pages
 
