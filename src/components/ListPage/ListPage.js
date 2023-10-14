@@ -12,7 +12,7 @@ import {
     DESC
 } from "./sortConstant";
 
-const ListPage = ({ApiImageConfig}) => {
+const ListPage = () => {
     const [movies, setMovies] = useState([]);
     const [sortKey, setSortKey] = useState("none");
     const [sortOrder, setSortOrder] = useState("desc");
@@ -72,7 +72,6 @@ const ListPage = ({ApiImageConfig}) => {
             <SearchBar submitSearch={submitSearch}/>
             <MovieList 
                 movies={movies} 
-                ApiImageConfig={ApiImageConfig} 
                 handleSortKeyChange={handleSortKeyChange}
                 handleSortOrderChange={handleSortOrderChange}
             />

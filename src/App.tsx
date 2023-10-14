@@ -8,7 +8,7 @@ import ListPage from './components/ListPage';
 import GalleryPage from './components/GalleryPage';
 import DetailView from './components/DetailView';
 
-export const AppContext = createContext();
+export const AppContext = createContext({});
 
 const App = () => {
 
@@ -46,7 +46,7 @@ const App = () => {
   }, [moviesListToDisplay]);
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/mp2">
         <div className="App">
           <AppContext.Provider 
             value={{ApiImageConfig, moviesListToDisplay, setMoviesListToDisplay, curIndex, setCurIndex}}
