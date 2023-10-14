@@ -46,7 +46,7 @@ const App = () => {
   }, [moviesListToDisplay]);
 
   return (
-    <BrowserRouter basename="/mp2">
+    <BrowserRouter >
         <div className="App">
           <AppContext.Provider 
             value={{ApiImageConfig, moviesListToDisplay, setMoviesListToDisplay, curIndex, setCurIndex}}
