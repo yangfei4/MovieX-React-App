@@ -7,6 +7,7 @@ const NavBar = () => {
       <div className='NavBarContainer'>
         <a href="/" className='AppLogo'>
           <i className="fa fa-film"></i>
+          <span className='AppTitle'> MovieX</span>
         </a>
         <nav className='NavBar'>
           <div className='NavButtons'>
