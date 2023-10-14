@@ -11,13 +11,14 @@ import {
     NONE,
     DESC
 } from "./sortConstant";
+import { Movie } from "../../App";
 
 const ListPage = () => {
-    const [movies, setMovies] = useState([]);
-    const [sortKey, setSortKey] = useState("none");
-    const [sortOrder, setSortOrder] = useState("desc");
+    const [movies, setMovies] = useState<Movie[]>([]);
+    const [sortKey, setSortKey] = useState<string>("none");
+    const [sortOrder, setSortOrder] = useState<string>("desc");
 
-    const submitSearch = useCallback(({searchText}) => { 
+    const submitSearch = useCallback(({searchText}: {searchText: string}) => { 
         const fetchMovies = async () => {
             try {
                 const response = await axios.get('https://api.themoviedb.org/3/search/movie', {
@@ -34,21 +35,21 @@ const ListPage = () => {
         fetchMovies();
     }, []);
 
-    const handleSortKeyChange = (event) => {
+    const handleSortKeyChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSortKey(event.target.value);
     };
 
-    const handleSortOrderChange = (event) => {
+    const handleSortOrderChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSortOrder(event.target.value);
     };
 
-    const sortMovies = useCallback(({sortKey}) => {
+    const sortMovies = useCallback(({sortKey}: {sortKey: string}) => {
         const sortedMovies = [...movies];
         sortedMovies.sort((a, b) => {
             if(sortKey === POPULARITY) {
                 return sortOrder === DESC ? b.popularity - a.popularity : a.popularity - b.popularity;
             } else if(sortKey === RELEASE_DATE) {
-                return sortOrder === DESC ? new Date(b.release_date) - new Date(a.release_date) : new Date(a.release_date) - new Date(b.release_date);
+                return sortOrder === DESC ? new Date(b.release_date).getTime() - new Date(a.release_date).getTime() : new Date(a.release_date).getTime() - new Date(b.release_date).getTime();
             } else if(sortKey === VOTE_AVERAGE) {
                 return sortOrder === DESC ? b.vote_average - a.vote_average : a.vote_average - b.vote_average;
             } else if(sortKey === NONE){

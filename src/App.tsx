@@ -8,7 +8,28 @@ import ListPage from './components/ListPage';
 import GalleryPage from './components/GalleryPage';
 import DetailView from './components/DetailView';
 
-export const AppContext = createContext({});
+export interface Movie {
+  id: number;
+  title: string;
+  poster_path: string;
+  backdrop_path: string;
+  runtime?: number;
+  release_date: string;
+  vote_average: number;
+  vote_count: number;
+  popularity: number;
+  overview: string;
+  production_countries?: {
+    iso_3166_1: string;
+    name: string;
+  }[];
+  genres: {
+    id: number;
+    name: string;
+  }[];
+}
+
+export const AppContext = createContext<any>(null);
 
 const App = () => {
 
@@ -41,10 +62,6 @@ const App = () => {
   const [moviesListToDisplay, setMoviesListToDisplay] = useState([]);
   const [curIndex, setCurIndex] = useState(0); // 0-based index
 
-  useEffect(() => {
-    console.log("moviesListToDisplay is updated: ", moviesListToDisplay);
-  }, [moviesListToDisplay]);
-
   return (
     <BrowserRouter >
         <div className="App">
@@ -55,8 +72,8 @@ const App = () => {
               <NavBar />
             </header>
             <Routes>
-              <Route path="/" element={<ListPage />} />
-              <Route path="/gallery" element={<GalleryPage />} />
+              <Route path="/" element={<GalleryPage />} />
+              <Route path="/search" element={<ListPage />} />
               <Route path="/detail/:id" element={<DetailView />} />
             </Routes>
             <footer className="App-footer">

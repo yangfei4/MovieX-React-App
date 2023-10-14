@@ -4,7 +4,7 @@ import axios from "axios";
 import { FaLongArrowAltLeft , FaLongArrowAltRight } from "react-icons/fa";
 
 import "./style.scss";
-import { AppContext } from "../../App";
+import { AppContext, Movie } from "../../App";
 
 const DetailView = () => {
     const {ApiImageConfig, moviesListToDisplay, curIndex, setCurIndex} = useContext(AppContext);
@@ -14,8 +14,8 @@ const DetailView = () => {
 
     const { id } = useParams();
 
-    const [movieDetail, setMovieDetail] = useState(null);
-    const [movieVideoUrls, setMovieVideoUrls] = useState(null);
+    const [movieDetail, setMovieDetail] = useState<Movie | null>(null);
+    const [movieVideoUrls, setMovieVideoUrls] = useState<string[]>([]);
 
     const navigate = useNavigate();
 
@@ -49,7 +49,6 @@ const DetailView = () => {
                         api_key: '43f32466ca1ce72ff63dd88e6eeebdcd'
                     }
                 });
-                console.log("movie from Newly Called API:", res.data);
                 setMovieDetail(res.data);
             } catch (error) {
                 console.error("The error message:", error);
@@ -58,7 +57,7 @@ const DetailView = () => {
         fetchMovieDetail();
     }, [id, setMovieDetail]);
 
-    function getVideoList(videoList) {
+    function getVideoList(videoList: any[]){
         const youtubeVideoList = videoList.filter((video) => (video.site === "YouTube"));
         const keyList = youtubeVideoList.map((video) => (video.key));
         const FirstFiveKeyList = keyList.length>=5 ? keyList.slice(0, 5) : keyList;
@@ -74,9 +73,8 @@ const DetailView = () => {
                         api_key: '43f32466ca1ce72ff63dd88e6eeebdcd'
                     }
                 });
-                console.log("fetched video:", res.data);
                 const videoKeys = getVideoList(res.data.results);
-                const videoUrls = videoKeys.map((videoKey) => (`https://www.youtube.com/embed/${videoKey}?origin=https%3A%2F%2Fwww.themoviedb.org&hl=en&modestbranding=1&fs=1&autohide=1`) );
+                const videoUrls = (videoKeys) ? videoKeys.map((videoKey) => (`https://www.youtube.com/embed/${videoKey}?origin=https%3A%2F%2Fwww.themoviedb.org&hl=en&modestbranding=1&fs=1&autohide=1`) ) : [];
                 setMovieVideoUrls(videoUrls);
             } catch (error) {
                 console.error("The error message:", error);
@@ -84,10 +82,6 @@ const DetailView = () => {
         };
         fetchMovieVideoUrls();
     }, [id, setMovieVideoUrls]);
-
-    useEffect(() => {
-        console.log("video url:", movieVideoUrls);
-    },[movieVideoUrls]);
 
     return (
         (movieDetail) ?
@@ -123,7 +117,7 @@ const DetailView = () => {
                             + `\u00a0 • \u00a0`
                             + movieDetail.genres.map((genre) => (genre.name)).join(", ")
                             + `\u00a0 • \u00a0`
-                            + `${Math.floor(movieDetail.runtime / 60)}h ${movieDetail.runtime % 60}m`
+                            + ((movieDetail.runtime) ? (`${Math.floor(movieDetail.runtime / 60)}h ${movieDetail.runtime % 60}m`) : "Unknown")
                             }
                         </span>
                         <span className="rating-popularity">
@@ -138,7 +132,7 @@ const DetailView = () => {
                         <label className="videos-label"><h3>Clips</h3></label>
                         <div className="videos-scroller">
                             <ol className="videos-list">
-                                {movieVideoUrls && movieVideoUrls.length>0 ? movieVideoUrls.map((videoUrl, index) => <li><iframe className="video" src={videoUrl} allowFullScreen title={index} ></iframe></li>) : <p>No clips found.</p>}
+                                {(movieVideoUrls && movieVideoUrls.length>0 )? movieVideoUrls.map((videoUrl, index) => <li key={index}><iframe className="video" src={videoUrl} allowFullScreen title={index}></iframe></li>) : <p>No clips found.</p>}
                             </ol>
                         </div>
                     </div>

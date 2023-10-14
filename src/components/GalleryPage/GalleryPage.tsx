@@ -12,13 +12,13 @@ const GalleryPage = () => {
     const { base_url, poster_sizes } = ApiImageConfig;
     const img_url = base_url + poster_sizes[4];
 
-    const [moviesPool, setMoviesPool] = useState([]); // store all movies
+    const [moviesPool, setMoviesPool] = useState<any[]>([]); // store all movies
 
-    const [movies, setMovies] = useState([]);
-    const [filterKeyList, setFilterKeyList] = useState([]);
+    const [movies, setMovies] = useState<any[]>([]);
+    const [filterKeyList, setFilterKeyList] = useState<any[]>([]);
 
     const navigate = useNavigate();
-    const handleClick = (id, index) => {
+    const handleClick = (id: number, index: number) => {
         setMoviesListToDisplay(movies);
         setCurIndex(index);
         navigate(`/detail/${id}`);
@@ -65,7 +65,7 @@ const GalleryPage = () => {
         filterMoviesByGenre();
     }, [filterKeyList, moviesPool]);
 
-    const toggleFilter = (id) => {
+    const toggleFilter = (id: number) => {
         if(filterKeyList.includes(id)){
             // remove id from filterKeyList
             const newFilterKeyList = filterKeyList.filter((key) => key !== id);

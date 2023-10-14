@@ -9,15 +9,21 @@ import {
     DESC,
     ASC
  } from "../ListPage/sortConstant";
- import { AppContext } from "../../App";
+import { AppContext, Movie } from "../../App";
 
- const MovieList = ({ movies, handleSortKeyChange, handleSortOrderChange}) => {
+interface MovieListProps {
+    movies: Movie[];
+    handleSortKeyChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+    handleSortOrderChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+}
+
+const MovieList = ({ movies, handleSortKeyChange, handleSortOrderChange }: MovieListProps) => {
     const {ApiImageConfig, setMoviesListToDisplay, setCurIndex} = useContext(AppContext);
     const { base_url, poster_sizes } = ApiImageConfig;
     const img_url = base_url + poster_sizes[4];
     
     const navigate = useNavigate();
-    const handleClick = (id, index) => {
+    const handleClick = (id: number, index: number) => {
         setMoviesListToDisplay(movies);
         setCurIndex(index);
         navigate(`/detail/${id}`);

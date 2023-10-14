@@ -2,13 +2,12 @@ import React from "react";
 import { useState, useEffect } from "react";
 import "./style.scss";
 import "font-awesome/css/font-awesome.min.css"
+//event handler type
+const SearchBar = ({submitSearch}: {submitSearch: any}) => {
 
-const SearchBar = ({submitSearch}) => {
+    const [searchText, setSearchText] = useState<string>("");
 
-    const [searchText, setSearchText] = useState("");
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
+    const handleSubmit = () => {
         submitSearch({searchText});
     };
 
@@ -18,7 +17,7 @@ const SearchBar = ({submitSearch}) => {
 
     return (
         <div className="SearchBar">
-            <form onSubmit={handleSubmit} className="SearchForm" action="./">
+            <form onSubmit={() => handleSubmit()} className="SearchForm" action="./">
                 <span>
                     <i className="fa fa-search" aria-hidden="true"></i>
                 </span>
