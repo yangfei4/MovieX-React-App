@@ -7,7 +7,8 @@ const SearchBar = ({submitSearch}: {submitSearch: any}) => {
 
     const [searchText, setSearchText] = useState<string>("");
 
-    const handleSubmit = () => {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
         submitSearch({searchText});
     };
 
@@ -17,7 +18,7 @@ const SearchBar = ({submitSearch}: {submitSearch: any}) => {
 
     return (
         <div className="SearchBar">
-            <form onSubmit={() => handleSubmit()} className="SearchForm" action="./">
+            <form onSubmit={(event) => handleSubmit(event)} className="SearchForm" action="./">
                 <span>
                     <i className="fa fa-search" aria-hidden="true"></i>
                 </span>
