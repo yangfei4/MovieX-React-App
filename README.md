@@ -1,5 +1,11 @@
 # 🎬 Movie Explorer using TMDB API
-A React-based web application that provides an intuitive movie browsing experience. Users can search for movies by keywords and explore an organized gallery. Clicking on individual movies will offer detailed information about the movie.
+A React-based web application that provides an intuitive movie browsing experience. Users can search for movies by keywords and explore an organized gallery. Clicking on individual movies will offer detailed information about the movie. See demo video [here](https://drive.google.com/file/d/1EUsHK-5SBVnv85nd41lu3VFM08tp_81g/view?usp=sharing).
+
+<p float="left" >
+  <img src="https://github.com/yangfei4/MovieX-React-App/blob/4744e54439a80d684c2cc7e22ebdd2d65e1d23ff/assets/galleryView.jpg" width="150" />
+  <img src="https://github.com/yangfei4/MovieX-React-App/blob/4744e54439a80d684c2cc7e22ebdd2d65e1d23ff/assets/searchView.jpg" width="150" /> 
+  <img src="https://github.com/yangfei4/MovieX-React-App/blob/4744e54439a80d684c2cc7e22ebdd2d65e1d23ff/assets/detailView.jpg" width="150" />
+</p>
 
 ## ✨ Features
 - **Movie Search**: Enables users to search for movies using keywords, and sort results by attributes.
